@@ -1,13 +1,31 @@
 GET http://localhost:3000/members
 
 ###
+GET http://localhost:3000/members/60d744f524c2b40fe01a6cad
+
+###
+
+DELETE http://localhost:3000/members/60d5a7fac4ea140afc0f8f50
+
+###
 
 POST http://localhost:3000/members
 Content-Type: application/json
 
 
 {
-    "name": "Araf",
+    "name": "Jhon",
     "gender": "Male",
-    "subscribeDate": "2021-06-23T13:22:41.545Z"
+    "subscribeDate": "2021-06-25T13:22:41.545Z"
+}
+
+###
+
+PATCH http://localhost:3000/members/60d744f524c2b40fe01a6cad
+Content-Type: application/json
+
+
+{
+    "name": "Araf H",
+    "contact": "01927574610"
 }
