@@ -1,0 +1,13 @@
+GET http://localhost:3000/members
+
+###
+
+POST http://localhost:3000/members
+Content-Type: application/json
+
+
+{
+    "name": "Araf",
+    "gender": "Male",
+    "subscribeDate": "2021-06-23T13:22:41.545Z"
+}
