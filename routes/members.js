@@ -13,7 +13,9 @@ router.get("/", async (req, res) => {
 });
 
 // Getting one
-router.get("/:id", (req, res) => {});
+router.get("/:id", getMember, (req, res) => {
+  res.send(res.member);
+});
 
 // Creating one
 router.post("/", async (req, res) => {
@@ -30,9 +32,49 @@ router.post("/", async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 });
+
 // Updating one
-router.patch("/:id", (req, res) => {});
+router.patch("/:id", getMember, async (req, res) => {
+  if (req.body.name != null) {
+    res.member.name = req.body.name;
+  }
+  if (req.body.gender != null) {
+    res.member.gender = req.body.gender;
+  }
+  if (req.body.contact != null) {
+    res.member.contact = req.body.contact;
+  }
+  try {
+    const updateMember = await res.member.save();
+    res.json(updateMember);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
 // Deleting one
-router.delete("/:id", (req, res) => {});
+router.delete("/:id", getMember, async (req, res) => {
+  try {
+    await res.member.remove();
+    res.json({ message: "Deleted Member Successfuly" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+async function getMember(req, res, next) {
+  let member;
+  try {
+    member = await Member.findById(req.params.id);
+    if (member == null) {
+      return res.status(404).json({ message: "Cannot find member!" });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+
+  res.member = member;
+  next();
+}
 
 module.exports = router;
