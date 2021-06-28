@@ -21,9 +21,11 @@ router.get("/:id", getMember, (req, res) => {
 router.post("/", async (req, res) => {
   const members = new Member({
     name: req.body.name,
-    gender: req.body.gender,
+    address: req.body.address,
     contact: req.body.contact,
+    age: req.body.age,
     subscribeDate: req.body.subscribeDate,
+    profilePic: req.body.profilePic,
   });
   try {
     const newMember = await members.save();
@@ -38,12 +40,21 @@ router.patch("/:id", getMember, async (req, res) => {
   if (req.body.name != null) {
     res.member.name = req.body.name;
   }
-  if (req.body.gender != null) {
-    res.member.gender = req.body.gender;
+  if (res.member.age != null) {
+    res.member.age = req.body.age;
   }
-  if (req.body.contact != null) {
+  if (res.member.address != null) {
+    res.member.address = req.body.address;
+  }
+
+  if (res.member.contact != null) {
     res.member.contact = req.body.contact;
   }
+
+  if (res.member.profilePic != null) {
+    res.member.profilePic = req.body.profilePic;
+  }
+
   try {
     const updateMember = await res.member.save();
     res.json(updateMember);
