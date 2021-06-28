@@ -17,4 +17,8 @@ app.use(cors());
 const membersRouter = require("./routes/members");
 app.use("/members", membersRouter);
 
-app.listen(5000, () => console.log("Server Started"));
+app.get("/", (req, res) => {
+  res.send("hello from db it's working");
+});
+
+app.listen(process.env.PORT || 5000, () => console.log("Server Started"));
