@@ -5,16 +5,22 @@ const memberSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  gender: {
+  address: {
     type: String,
   },
   contact: {
     type: String,
   },
+  age: {
+    type: Number,
+  },
   subscribeDate: {
     type: Date,
     required: true,
     default: Date.now,
+  },
+  profilePic: {
+    type: String,
   },
 });
 
